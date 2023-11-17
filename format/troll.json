@@ -1,4 +1,4 @@
 {
   "image": "you mad.jpg",
-  "consult": "impact48.json"
+  "include": ".impact48.json"
 }

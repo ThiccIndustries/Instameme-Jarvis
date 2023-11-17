@@ -1,4 +1,4 @@
-package com.thiccindustries.instamemebot;
+package com.thiccindustries.jarvis;
 
 
 import com.thiccindustries.instameme.Instameme;
@@ -13,6 +13,9 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.utils.FileUpload;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collections;
 
 public class Bot extends ListenerAdapter {
@@ -39,14 +42,40 @@ public class Bot extends ListenerAdapter {
                         .addOption(OptionType.STRING, "caption4", "Caption 5", false)
                         .addOption(OptionType.STRING, "caption5", "Caption 6", false)
                         .addOption(OptionType.STRING, "caption6", "Caption 7", false)
-                        .addOption(OptionType.STRING, "caption7", "Caption 8", false)
+                        .addOption(OptionType.STRING, "caption7", "Caption 8", false),
+                Commands.slash("jarvis-list", "List all formats available to J.A.R.V.I.S.")
         ).queue();
     }
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-        if(!event.getName().equals("jarvis"))
+        if(!(event.getName().equals("jarvis") || event.getName().equals("jarvis-list")))
             return;
+
+        if(event.getName().equals("jarvis-list")){
+            System.out.println("here");
+            File folder = new File("format");
+            File[] formatlist = folder.listFiles();
+            StringBuilder sb = new StringBuilder();
+            sb.append("I can give you ");
+            for(int i = 0; i < formatlist.length; ++i){
+                if(!formatlist[i].isFile() || formatlist[i].getName().startsWith("."))
+                    continue;
+
+                sb.append("``");
+                sb.append(formatlist[i].getName().substring(0, formatlist[i].getName().length() - 5));
+                sb.append("``");
+                if(i < formatlist.length - 2)
+                    sb.append(", ");
+
+                if(i == formatlist.length - 2)
+                    sb.append(" and ");
+            }
+            sb.append(" formatted memes Sir.");
+
+            event.reply(sb.toString()).setEphemeral(true).queue();
+            return;
+        }
 
         String template = event.getOption("template", OptionMapping::getAsString);
 
@@ -68,10 +97,10 @@ public class Bot extends ListenerAdapter {
                     error = "Invalid syntax sent to IM. Consult console.";
                     break;
                 case -2:
-                    error = "Format \"" + template + "\" not found or malformed.";
+                    error = "I'm sorry Sir. I don't know about the ``" + template + "`` format.";
                     break;
                 case -3:
-                    error = "Unable to read image referenced by " + template + ".json";
+                    error = "Unable to read image/captions given by " + template + ".json";
                     break;
                 case -4:
                     error = "Unknown error while building meme. Consult console.";
@@ -86,7 +115,7 @@ public class Bot extends ListenerAdapter {
         }
 
         event.reply("Just a moment Sir.").setEphemeral(true).queue();
-p
+
         FileUpload file = FileUpload.fromData(new File("temp.png"), "instameme.png");
 
         event.getChannel().sendMessage("").addFiles(file).queue();

@@ -10,21 +10,30 @@ import javax.json.*;
 public class Template {
     public final Caption[] captions;
     public final BufferedImage base;
-    public Template(Caption[] captions, BufferedImage base){
-        this.captions = captions;
-        this.base = base;
-    }
+    public final BufferedImage overlay;
+
 
     public Template(JsonObject obj){
-        int captionCount = obj.getInt("count");
+
+        if(!obj.containsKey("captions")){
+            captions = null;
+            base = null;
+            overlay = null;
+            return;
+        }
+
         JsonArray captionJsonArray = obj.getJsonArray("captions");
+
+        int captionCount = captionJsonArray.size();
 
         captions = new Caption[captionCount];
         for(int i = 0; i < captionCount; ++i){
             captions[i] = new Caption(captionJsonArray.getJsonObject(i));
         }
 
-        String baseImageFilePath = obj.getString("image");
+        String baseImageFilePath = "jarvis.png";
+        if(obj.containsKey("image"))
+            baseImageFilePath = obj.getString("image");
 
         BufferedImage bufferedImage = null;
         try{
@@ -32,5 +41,16 @@ public class Template {
         }catch(IOException e){e.printStackTrace(); }
 
         base = bufferedImage;
+
+        BufferedImage overlayImage = null;
+        if(obj.containsKey("overlay")){
+            String overlayImagePath = obj.getString("overlay");
+            try{
+                overlayImage = ImageIO.read(new File("image/" + overlayImagePath));
+            }catch(IOException e){e.printStackTrace(); }
+        }
+
+        overlay = overlayImage;
     }
+
 }

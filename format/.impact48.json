@@ -1,0 +1,18 @@
+{
+	"captions": [
+		{
+			"fontFamily": "Impact",
+			"shadow": true,
+			"fontSize": 48,
+			"size": [-1,100],
+			"align": [1,0]
+		},
+		{
+			"fontFamily": "Impact",
+			"shadow": true,
+			"fontSize": 48,
+			"size": [-1,100],
+			"align": [1,2]
+		}
+	]
+}

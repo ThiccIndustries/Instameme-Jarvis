@@ -41,7 +41,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.thiccindustries.instameme</mainClass>
+                            <mainClass>com.thiccindustries.Instameme</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

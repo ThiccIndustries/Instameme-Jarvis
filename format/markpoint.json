@@ -1,4 +1,4 @@
 {
   "image": "markpoint.jpg",
-  "consult": "impact72.json"
+  "include": ".impact72.json"
 }

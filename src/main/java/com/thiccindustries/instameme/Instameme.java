@@ -24,13 +24,14 @@ public class Instameme {
         String templateString = args[1];
         String strings[] = Arrays.copyOfRange(args, 2, args.length);
 
-        JsonObject templateJson = readJsonFile(templateString);
+        JsonObject templateJson = Utils.LoadJsonFileRecursive(templateString);
 
         if(templateJson == null){
             System.out.println("invalid or missing json");
             return -2;
         }
 
+        System.out.println("Template " + templateString + " loaded as: \n" + templateJson.toString());
         Template template = new Template(templateJson);
 
         if(template.base == null){
@@ -69,24 +70,4 @@ public class Instameme {
         System.out.println("Usage: java -jar Instameme {output} {format} {string 1} {string 2} ... {string n}");
     }
 
-    public static JsonObject readJsonFile(String path){
-        try {
-            String jsonString = new String(Files.readAllBytes(Paths.get(path)));
-
-            JsonReader reader = Json.createReader(new StringReader(jsonString));
-            JsonObject obj = reader.readObject();
-
-            if(obj == null){
-                System.err.println("Failed to parse json file!");
-            }
-
-            System.out.println("Format loaded: ");
-            System.out.println(obj);
-            return obj;
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }
