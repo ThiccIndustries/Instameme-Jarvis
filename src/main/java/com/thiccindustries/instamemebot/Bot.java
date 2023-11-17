@@ -84,6 +84,9 @@ public class Bot extends ListenerAdapter {
             event.reply(error).setEphemeral(true).queue();
             return;
         }
+
+        event.reply("Just a moment Sir.").setEphemeral(true).queue();
+p
         FileUpload file = FileUpload.fromData(new File("temp.png"), "instameme.png");
 
         event.getChannel().sendMessage("").addFiles(file).queue();
