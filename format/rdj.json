@@ -1,0 +1,15 @@
+{
+	"image": "rdj.jpg",
+	"count": 1,
+	"captions": [
+	{
+		"fontFamily": "Arial",
+		"fontWeight": 0,
+		"fontSize": 36,
+		"maxWidth": 490,
+		"align": [1,1],
+		"color": "#000000",
+		"pos": [245, 147]
+	}
+	]
+}

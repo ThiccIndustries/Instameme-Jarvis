@@ -1,0 +1,16 @@
+{
+	"image": "banger.png",
+	"overlay": "banger_overlay.png",
+	"count": 1,
+	"captions": [
+    {
+		"fontFamily": "Arial",
+		"fontWeight": 0,
+		"fontSize": 32,
+		"maxWidth": 350,
+		"align": [0,0],
+		"color": "#FFFFFF",
+		"pos": [62,140]
+    }
+	]
+}

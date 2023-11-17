@@ -1,0 +1,15 @@
+{
+	"image": "clearly.png",
+	"count": 1,
+	"captions": [
+    {
+		"fontFamily": "Times New Roman",
+		"fontWeight": 0,
+		"fontSize": 72,
+		"maxWidth": -1,
+		"align": [1,1],
+		"color": "#FFFFFF",
+		"pos": [843, 1424]
+	}
+	]
+}
